@@ -5,8 +5,9 @@ const express = require('express');
 const { connect } = require('./db');
 
 const clientRouter = require('./routes/client');
-const walkerRouter =  require('./routes/walker')
-const petRouter = require('./routes/pet')
+const walkerRouter =  require('./routes/walker');
+const petRouter = require('./routes/pet');
+const medicineRouter = require('./routes/medicine')
 
 const port = process.env.PORT;
 const app = express();
@@ -19,6 +20,7 @@ app.use(morgan('dev'));
 app.use('/clients', clientRouter);
 app.use('/walkers', walkerRouter);
 app.use('/pets', petRouter);
+app.use('/medicines', medicineRouter);
 
 app.listen(port, () => {
   console.log(`App running at http://localhost:${port}`);
