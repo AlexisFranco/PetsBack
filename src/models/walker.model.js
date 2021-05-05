@@ -34,9 +34,6 @@ const walkerSchema = new Schema(
       required: [true, 'El número de celular es requerido'],
       minlength: [10, 'El número de contacto debe ser de celular'],
     },
-    zone: {
-      type: String,
-    },
     description: {
       type: String,
     },
@@ -48,6 +45,9 @@ const walkerSchema = new Schema(
     },
     photo: {
       type: String,
+    },
+    zoneIDs: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'Zone' }],
     },
     serviceIDs: {
       type: [{ type: Schema.Types.ObjectId, ref: 'Service' }],
