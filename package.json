@@ -1,0 +1,8 @@
+{
+  "name": "PetsBack",
+  "version": "1.0.0",
+  "description": "Application health dogs management",
+  "main": "src/server.js",
+  "license": "MIT",
+  "author": "Alexis Franco <alexisfrancolopez@gmail.com> (https://www.linkedin.com/in/alexisfrancol)"
+}
