@@ -8,7 +8,7 @@ module.exports = {
       const pet = await Pet.findById(body.petID);
 
       if(pet.clientID.toString() === userID.toString()) {
-        const medicine = await Medicine.create({ body });
+        const medicine = await Medicine.create( body );
         pet.medicineIDs.push(medicine._id);
         await pet.save({ validateBeforeSave: false });
         res.status(200).json({ message: 'Medicine created successfully', medicine });
