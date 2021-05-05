@@ -14,7 +14,7 @@ const petSchema = new Schema(
             return false;
           }
         },
-        message: 'El correo electrónico ya exite',
+        message: 'La mascota que quieres registrar ya exite',
       },
     },
     whatPet: {
@@ -31,7 +31,7 @@ const petSchema = new Schema(
     },
     idealWeight: {
       type: Number,
-      required: [true.valueOf, 'El peso ideal de tu mascota es necesaria'],
+      required: [true, 'El peso ideal de tu mascota es necesaria'],
     },
     breed: {
       type: String,

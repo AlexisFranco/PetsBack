@@ -5,10 +5,10 @@ module.exports = {
   async create(req, res) {
     try {
       const { body, params: { userID } } = req;
-
       const pet = await Pet.create({ ...body, clientID: userID });
       const client = await Client.findById(userID);
-      client.pet.push(pet._id);
+      console.log(pet);
+      client.petIDs.push(pet._id);
       await client.save({ validateBeforeSave: false });
       res.status(200).json({ message: 'Pet created successfully', pet });
 
@@ -35,8 +35,10 @@ module.exports = {
 
       if(pet.clientID.toString() === userID.toString()) {
         const petUpdate = await Pet.findByIdAndUpdate(petID, body, { new: true });
+        res.status(200).json({ message: 'Pet updated', petUpdate });
+      } else {
+        throw 'Pet is not owned by current client'
       }
-      res.status(200).json({ message: 'Pet updated', petUpdate });
 
     } catch (error) {
       res.status(400).json({ message: 'Pet could not be updated', error });
@@ -53,11 +55,13 @@ module.exports = {
         client.petIDs.pull(petID);
         client.save({ validateBeforeSave: false });
         const petDelete = await Pet.findByIdAndDelete(petID);
+        res.status(200).json({ message: 'Pet deleted', petDelete });
+      } else {
+        throw 'Pet not owned'
       }
-      res.status(200).json({ message: 'Pet deleted', petDelete });
 
     } catch (error) {
-      res.status(400).json({ message: 'Pet could not be deleted', error });
+      res.status(400).json({ message: 'Pet   could not be deleted', error });
     }
   },
 };
