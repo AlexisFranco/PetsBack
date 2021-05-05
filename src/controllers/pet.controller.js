@@ -7,7 +7,6 @@ module.exports = {
       const { body, params: { userID } } = req;
       const pet = await Pet.create({ ...body, clientID: userID });
       const client = await Client.findById(userID);
-      console.log(pet);
       client.petIDs.push(pet._id);
       await client.save({ validateBeforeSave: false });
       res.status(200).json({ message: 'Pet created successfully', pet });
