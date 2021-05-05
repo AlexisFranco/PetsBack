@@ -38,11 +38,11 @@ const clientSchema = new Schema(
       type: String,
       required: [true, 'La dirección de residencia es necesaria'],
     },
-    petIDs: {
-      type: [{ type: Schema.Types.ObjectId, ref: 'Dog' }],
-    },
     photo: {
       type: String,
+    },
+    petIDs: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'Dog' }],
     },
   },
   {
