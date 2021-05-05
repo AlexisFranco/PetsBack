@@ -12,9 +12,8 @@ module.exports = {
         process.env.SECRET,
         { expiresIn: 60 * 60 * 24 }
       );
-      res
-        .status(200)
-        .json({ message: 'Client created successfully', token, client });
+      res.status(200).json({ message: 'Client created successfully', token, client });
+
     } catch (error) {
       res.status(400).json({ message: 'Client could not be created', error });
     }
@@ -24,24 +23,19 @@ module.exports = {
       const { query } = req;
 
       const clients = await Client.find(query);
-      res
-        .status(200)
-        .json({ message: `${clients.length} clients found`, clients });
+      res.status(200).json({ message: `${clients.length} clients found`, clients });
+
     } catch (error) {
       res.status(400).json({ message: 'Clients could not be found', error });
     }
   },
   async update(req, res) {
     try {
-      const {
-        body,
-        params: { userID },
-      } = req;
+      const { body,params: { userID } } = req;
 
-      const clientUpdate = await Client.findByIdAndUpdate(userID, body, {
-        new: true,
-      });
+      const clientUpdate = await Client.findByIdAndUpdate(userID, body, { new: true });
       res.status(200).json({ message: 'Client updated', clientUpdate });
+
     } catch (error) {
       res.status(400).json({ message: 'Client could not be updated', error });
     }
@@ -52,6 +46,7 @@ module.exports = {
 
       const clientDelete = await Client.findByIdAndDelete(userID);
       res.status(200).json({ message: 'Client deleted', clientDelete });
+
     } catch (error) {
       res.status(400).json({ message: 'Client could not be deleted', error });
     }
