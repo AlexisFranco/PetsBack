@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const express = require('express');
 const { connect } = require('./db');
 
+const clientRouter = require('./routes/client');
+
 const port = process.env.PORT;
 const app = express();
 connect();
@@ -11,6 +13,8 @@ connect();
 app.use(express.json());
 app.use(cors({ origin: '*' }));
 app.use(morgan('dev'));
+
+app.use('/clients', clientRouter);
 
 app.listen(port, () => {
   console.log(`App running at http://localhost:${port}`);
