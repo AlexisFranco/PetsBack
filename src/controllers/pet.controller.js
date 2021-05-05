@@ -7,6 +7,7 @@ module.exports = {
       const { body, params: { userID } } = req;
       const pet = await Pet.create({ ...body, clientID: userID });
       const client = await Client.findById(userID);
+
       client.petIDs.push(pet._id);
       await client.save({ validateBeforeSave: false });
       res.status(200).json({ message: 'Pet created successfully', pet });
@@ -60,7 +61,7 @@ module.exports = {
       }
 
     } catch (error) {
-      res.status(400).json({ message: 'Pet   could not be deleted', error });
+      res.status(400).json({ message: 'Pet could not be deleted', error });
     }
   },
 };
