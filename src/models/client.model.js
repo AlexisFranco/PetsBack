@@ -22,7 +22,7 @@ const clientSchema = new Schema(
             return false;
           }
         },
-        message: 'El correo electrónico ya exite',
+        message: 'El correo electrónico ya existe',
       },
     },
     password: {

@@ -14,7 +14,7 @@ const petSchema = new Schema(
             return false;
           }
         },
-        message: 'La mascota que quieres registrar ya exite',
+        message: 'La mascota que quieres registrar ya existe',
       },
     },
     whatPet: {
@@ -44,6 +44,9 @@ const petSchema = new Schema(
     },
     serviceIDs: {
       type: [{ type: Schema.Types.ObjectId, ref: 'Service' }],
+    },
+    medicineIDs: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'Medicine' }],
     },
     clientID: {
       type: Schema.Types.ObjectId,
