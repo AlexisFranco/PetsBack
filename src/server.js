@@ -5,6 +5,7 @@ const express = require('express');
 const { connect } = require('./db');
 
 const petRouter = require('./routes/pet');
+const userRouter = require('./routes/user')
 const zoneRouter = require('./routes/zone');
 const clientRouter = require('./routes/client');
 const walkerRouter =  require('./routes/walker');
@@ -21,6 +22,7 @@ app.use(cors({ origin: '*' }));
 app.use(morgan('dev'));
 
 app.use('/pets', petRouter);
+app.use('/users', userRouter);
 app.use('/zones', zoneRouter);
 app.use('/clients', clientRouter);
 app.use('/walkers', walkerRouter);
