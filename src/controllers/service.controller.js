@@ -5,7 +5,7 @@ const Walker = require('../models/walker.model');
 module.exports = {
   async create(req, res) {
     try {
-      const { body, params: { userID } } = req;
+      const { body, userID } = req;
       const pet = await Pet.findById(body.petID);
       const walker = await Walker.findById(body.walkerID);
 
@@ -52,7 +52,7 @@ module.exports = {
   },
   async destroy(req, res) {
     try {
-      const { body, params: { userID } } = req;
+      const { body, userID } = req;
       const petID = body.petID;
       const walkerID = body.walkerID;
       const serviceID = body.serviceID;
