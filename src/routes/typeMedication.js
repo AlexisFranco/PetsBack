@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const typeController = require('../controllers/typeMedication.controller');
+const typeMedicationController = require('../controllers/typeMedication.controller');
 
-router.route('/').get(typeController.list);
-router.route('/').post(typeController.create);
-router.route('/').put(typeController.update);
-router.route('/').delete(typeController.destroy);
+router.route('/').get(typeMedicationController.list);
+router.route('/').post(typeMedicationController.create);
+router.route('/').put(typeMedicationController.update);
+router.route('/').delete(typeMedicationController.destroy);
 
 module.exports = router;

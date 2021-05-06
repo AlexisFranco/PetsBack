@@ -9,6 +9,7 @@ const walkerRouter =  require('./routes/walker');
 const petRouter = require('./routes/pet');
 const medicineRouter = require('./routes/medicine');
 const serviceRouter = require('./routes/service');
+const typeMedicationRouter = require('./routes/typeMedication');
 
 const port = process.env.PORT;
 const app = express();
@@ -23,6 +24,7 @@ app.use('/walkers', walkerRouter);
 app.use('/pets', petRouter);
 app.use('/medicines', medicineRouter);
 app.use('/services', serviceRouter);
+app.use('/types', typeMedicationRouter);
 
 app.listen(port, () => {
   console.log(`App running at http://localhost:${port}`);

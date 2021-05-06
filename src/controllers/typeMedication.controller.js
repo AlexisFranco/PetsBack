@@ -4,7 +4,7 @@ module.exports = {
   async create(req, res) {
     try {
       const { body } = req;
-
+      console.log(body);
       const typeMedication = await TypeMedication.create(body);
 
       res.status(200).json({ message: 'Type created successfully', typeMedication });
