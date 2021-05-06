@@ -31,7 +31,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const { body,params: { userID } } = req;
+      const { body, userID } = req;
 
       const walkerUpdate = await Walker.findByIdAndUpdate(userID, body, { new: true });
       res.status(200).json({ message: 'Walker updated', walkerUpdate });
@@ -42,7 +42,7 @@ module.exports = {
   },
   async destroy(req, res) {
     try {
-      const { userID } = req.params;
+      const { userID } = req;
 
       const walkerDelete = await Walker.findByIdAndDelete(userID);
       res.status(200).json({ message: 'Walker deleted', walkerDelete });

@@ -4,16 +4,21 @@ const Client = require('../models/client.model');
 module.exports = {
   async create(req, res) {
     try {
-      const { body, params: { userID } } = req;
-      const pet = await Pet.create({ ...body, clientID: userID });
-      const client = await Client.findById(userID);
+      const { body, userID, userType } = req;
 
-      client.petIDs.push(pet._id);
-      await client.save({ validateBeforeSave: false });
-      res.status(200).json({ message: 'Pet created successfully', pet });
+      if (userType === 'client'){
+        const pet = await Pet.create({ ...body, clientID: userID });
+        const client = await Client.findById(userID);
+
+        client.petIDs.push(pet._id);
+        await client.save({ validateBeforeSave: false });
+        res.status(200).json({ message: 'Pet created successfully', pet });
+      } else {
+        throw Error ('User was not client')
+      }
 
     } catch (error) {
-      res.status(400).json({ message: 'Pet could not be created', error });
+      res.status(400).json({ message: error.message });
     }
   },
   async list(req, res) {
@@ -29,7 +34,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const { body, params: { userID } } = req;
+      const { body, userID } = req;
       const petID = body.petID;
       const pet = await Pet.findById(petID);
 
@@ -46,7 +51,7 @@ module.exports = {
   },
   async destroy(req, res) {
     try {
-      const { body, params: { userID } } = req;
+      const { body, userID } = req;
       const petID = body.petID;
       const client = await Client.findById(userID);
       const pet = await Pet.findById(petID);

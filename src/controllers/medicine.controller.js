@@ -4,7 +4,7 @@ const Pet = require('../models/pet.model');
 module.exports = {
   async create(req, res) {
     try {
-      const { body, params: { userID } } = req;
+      const { body, userID } = req;
       const pet = await Pet.findById(body.petID);
 
       if(pet.clientID.toString() === userID.toString()) {
@@ -13,11 +13,11 @@ module.exports = {
         await pet.save({ validateBeforeSave: false });
         res.status(200).json({ message: 'Medicine created successfully', medicine });
       } else {
-        throw 'Pet is not owned by current client';
+        throw Error ('Pet is not owned by current client');
       }
 
     } catch (error) {
-      res.status(400).json({ message: 'Medicine could not be created', error });
+      res.status(400).json({ message: error.message , error });
     }
   },
   async list(req, res) {
