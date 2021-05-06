@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Client = require('../models/client.model');
+const Pet = require('../models/pet.model');
 
 module.exports = {
   async signup(req, res) {
@@ -31,7 +32,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const { body,params: { userID } } = req;
+      const { body, userID } = req;
 
       const clientUpdate = await Client.findByIdAndUpdate(userID, body, { new: true });
       res.status(200).json({ message: 'Client updated', clientUpdate });
@@ -42,8 +43,12 @@ module.exports = {
   },
   async destroy(req, res) {
     try {
-      const { userID } = req.params;
+      const { userID } = req;
+      const client = await Client.findById(userID);
 
+      client.petIDs.map(async (pet) => {
+        await Pet.findByIdAndDelete(pet._id);
+      })
       const clientDelete = await Client.findByIdAndDelete(userID);
       res.status(200).json({ message: 'Client deleted', clientDelete });
 
