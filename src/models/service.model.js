@@ -10,6 +10,10 @@ const serviceSchema = new Schema(
       type: String,
       required: [true, 'El tiempo de la caminata es necesaria'],
     },
+    date: {
+      type: String,
+      required: [true, "La fecha de la caminata es necesaria"],
+    },
     cost: {
       type: String,
     },

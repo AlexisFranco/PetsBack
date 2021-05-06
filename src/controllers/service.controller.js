@@ -62,13 +62,12 @@ module.exports = {
       if (pet.clientID.toString() === userID.toString()) {
         pet.serviceIDs.pull(serviceID);
         pet.save({ validateBeforeSave: false });
-        const petDelete = await Pet.findByIdAndDelete(petID);
 
         walker.serviceIDs.pull(serviceID);
         walker.save({ validateBeforeSave: false });
-        const walkerDelete = await Walker.findByIdAndDelete(walkerID);
+        const serviceDelete = await Service.findByIdAndDelete(serviceID);
 
-        res.status(200).json({ message: 'Service deleted' });
+        res.status(200).json({ message: 'Service deleted', serviceDelete });
       } else {
         throw 'Service not owned';
       }
