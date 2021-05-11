@@ -23,9 +23,11 @@ module.exports = {
   },
   async list(req, res) {
     try {
-      const { query } = req;
-
-      const pets = await Pet.find(query);
+      const { userID } = req;
+      const objClient = {
+        'clientID': userID,
+      }
+      const pets = await Pet.find(objClient);
       res.status(200).json({ message: `${pets.length} pets found`, pets });
 
     } catch (error) {

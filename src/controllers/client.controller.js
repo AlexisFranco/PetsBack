@@ -19,12 +19,12 @@ module.exports = {
       res.status(400).json({ message: 'Client could not be created', error });
     }
   },
-  async list(req, res) {
+  async show(req, res) {
     try {
-      const { query } = req;
+      const { userID } = req;
 
-      const clients = await Client.find(query);
-      res.status(200).json({ message: `${clients.length} clients found`, clients });
+      const client = await Client.findById(userID)
+      res.status(200).json({ message: 'Client found', client });
 
     } catch (error) {
       res.status(400).json({ message: 'Clients could not be found', error });
