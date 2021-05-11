@@ -42,7 +42,7 @@ const clientSchema = new Schema(
       type: String,
     },
     petIDs: {
-      type: [{ type: Schema.Types.ObjectId, ref: 'Dog' }],
+      type: [{ type: Schema.Types.ObjectId, ref: 'Pet' }],
     },
   },
   {

@@ -23,7 +23,7 @@ module.exports = {
     try {
       const { userID } = req;
 
-      const client = await Client.findById(userID)
+      const client = await Client.findById(userID).populate('petIDs');
       res.status(200).json({ message: 'Client found', client });
 
     } catch (error) {
