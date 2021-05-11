@@ -5,17 +5,6 @@ const petSchema = new Schema(
     name: {
       type: String,
       required: [true, 'El nombre es requerido'],
-      validate: {
-        async validator(name) {
-          try {
-            const pet = await models.Pet.findOne({ name });
-            return !pet;
-          } catch (error) {
-            return false;
-          }
-        },
-        message: 'La mascota que quieres registrar ya existe',
-      },
     },
     whatPet: {
       type: String,
