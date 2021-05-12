@@ -22,8 +22,8 @@ module.exports = {
     try {
       const { query } = req;
 
-      const walkers = await Walker.find(query);
-      res.status(200).json({ message: `${walkers.length} walkers found`, walkers });
+      const walkers = await Walker.find(query).populate('serviceIDs');
+      res.status(200).json({ walkers });
 
     } catch (error) {
       res.status(400).json({ message: 'Walkers could not be found', error });

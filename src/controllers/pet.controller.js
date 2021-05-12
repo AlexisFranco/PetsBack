@@ -27,7 +27,7 @@ module.exports = {
       const objClient = {
         'clientID': userID,
       }
-      const pets = await Pet.find(objClient);
+      const pets = await Pet.find(objClient).populate('medicineIDs');
       res.status(200).json({ message: `${pets.length} pets found`, pets });
 
     } catch (error) {
