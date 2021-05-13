@@ -36,7 +36,6 @@ const clientSchema = new Schema(
     },
     address: {
       type: String,
-      required: [true, 'La dirección de residencia es necesaria'],
     },
     photo: {
       type: String,

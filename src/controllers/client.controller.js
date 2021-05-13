@@ -8,12 +8,13 @@ module.exports = {
       const { body } = req;
 
       const client = await Client.create(body);
-      const token = jwt.sign(
-        { userID: client._id, userType: 'client' },
-        process.env.SECRET,
-        { expiresIn: 60 * 60 * 24 }
-      );
-      res.status(200).json({ message: 'Client created successfully', token, client });
+      const userID = client._id;
+      const userType = 'client';
+
+      const token = jwt.sign({ userID, userType }, process.env.SECRET, {
+        expiresIn: 60 * 60 * 24,
+      });
+      res.status(200).json({ token, userType, userID });
 
     } catch (error) {
       res.status(400).json({ message: 'Client could not be created', error });
@@ -23,7 +24,19 @@ module.exports = {
     try {
       const { userID } = req;
 
-      const client = await Client.findById(userID).populate('petIDs');
+      const client = await Client.findById(userID)
+        .populate({
+          path:'petIDs',
+          populate: {
+            path:'serviceIDs',
+          },
+        })
+        .populate({
+          path:'petIDs',
+          populate: {
+            path:'medicineIDs',
+          },
+        });
       res.status(200).json({ message: 'Client found', client });
 
     } catch (error) {
