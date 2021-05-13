@@ -7,12 +7,15 @@ module.exports = {
       const { body } = req;
 
       const walker = await Walker.create(body);
+      const userID = walker._id;
+      const userType = 'walker';
+
       const token = jwt.sign(
-        { userID: walker._id, userType: 'walker' },
+        { userID, userType },
         process.env.SECRET,
         { expiresIn: 60 * 60 * 24 }
       );
-      res.status(200).json({ message: 'Walker created successfully', token, walker });
+      res.status(200).json({ token, userType, userID });
 
     } catch (error) {
       res.status(400).json({ message: 'Walker could not be created', error });
