@@ -15,11 +15,11 @@ const petSchema = new Schema(
       required: [true, 'La fecha de nacimiento es requerida'],
     },
     weight: {
-      type: Number,
+      type: String,
       required: [true, 'Es necesario agregar el peso actual de la mascota'],
     },
     idealWeight: {
-      type: Number,
+      type: String,
       required: [true, 'El peso ideal de tu mascota es necesaria'],
     },
     breed: {
