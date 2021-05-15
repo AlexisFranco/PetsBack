@@ -22,7 +22,7 @@ const serviceSchema = new Schema(
       default: 'Solicitado',
     },
     hour: {
-      type: Number,
+      type: String,
       required: [true, 'La hora de recogida de la mascota es necesario'],
     },
     petID: {
