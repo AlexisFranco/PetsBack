@@ -1,21 +1,10 @@
-const { model, Schema, models } = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 const medicineSchema = new Schema(
   {
     name: {
       type: String,
       required: [true, 'El nombre del medicamento es requerido'],
-      validate: {
-        async validator(name) {
-          try {
-            const medicine = await models.Medicine.findOne({ name });
-            return !medicine;
-          } catch (error) {
-            return false;
-          }
-        },
-        message: 'El medicamento ya existe',
-      },
     },
     whatMedicine: {
       type: String,
