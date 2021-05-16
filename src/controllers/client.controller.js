@@ -25,18 +25,6 @@ module.exports = {
       const { userID } = req;
 
       const client = await Client.findById(userID)
-        .populate({
-          path:'petIDs',
-          populate: {
-            path:'serviceIDs',
-          },
-        })
-        .populate({
-          path:'petIDs',
-          populate: {
-            path:'medicineIDs',
-          },
-        });
       res.status(200).json({ message: 'Client found', client });
 
     } catch (error) {
