@@ -24,7 +24,7 @@ module.exports = {
     try {
       const { userID } = req;
 
-      const client = await Client.findById(userID)
+      const client = await Client.findById(userID).populate('petIDs')
       res.status(200).json({ message: 'Client found', client });
 
     } catch (error) {
@@ -39,6 +39,7 @@ module.exports = {
       res.status(200).json({ message: 'Client updated', clientUpdate });
 
     } catch (error) {
+      console.dir(error)
       res.status(400).json({ message: 'Client could not be updated', error });
     }
   },
