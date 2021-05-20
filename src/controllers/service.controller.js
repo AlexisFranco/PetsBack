@@ -31,7 +31,10 @@ module.exports = {
     try {
       const { query } = req;
 
-      const services = await Service.find(query);
+      const services = await Service.find(query).populate({
+        path: 'petID',
+        select: 'name',
+      });
       res.status(200).json({ message: `${services.length} services found`, services });
     } catch (error) {
       res.status(400).json({ message: 'Services could not be found', error });
@@ -39,14 +42,22 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const { body, params: { serviceID } } = req;
+      const { body, userID, params: { serviceID } } = req;
 
-      const serviceUpdate = await Service.findByIdAndUpdate(serviceID, body, {
-        new: true,
-      });
-      res.status(200).json({ message: 'Service updated', serviceUpdate });
+      const walker = await Walker.findById(userID);
+      const service = await Service.findById(serviceID);
+
+      if (walker._id.toString() === service.walkerID.toString()) {
+        const serviceUpdate = await Service.findByIdAndUpdate(serviceID, body, {
+          new: true,
+        });
+        res.status(200).json({ message: 'Service updated', serviceUpdate });
+      } else {
+        throw 'Service is not asigned to current walker';
+      }
 
     } catch (error) {
+      console.dir(error)
       res.status(400).json({ message: 'Service could not be updated', error });
     }
   },
