@@ -25,7 +25,14 @@ module.exports = {
     try {
       const { query } = req;
 
-      const walkers = await Walker.find(query).populate('serviceIDs');
+      const walkers = await Walker.find(query)
+        .populate({
+          path: 'serviceIDs',
+          populate: {
+            path: 'petID',
+            select: 'name',
+          }
+        });
       res.status(200).json({ walkers });
 
     } catch (error) {
