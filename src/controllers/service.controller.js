@@ -31,10 +31,15 @@ module.exports = {
     try {
       const { query } = req;
 
-      const services = await Service.find(query).populate({
-        path: 'petID',
-        select: 'name',
-      });
+      const services = await Service.find(query)
+        .populate({
+          path: 'petID',
+          select: 'name',
+        })
+        .populate({
+          path: 'walkerID',
+          select: 'name',
+        });
       res.status(200).json({ message: `${services.length} services found`, services });
     } catch (error) {
       res.status(400).json({ message: 'Services could not be found', error });
