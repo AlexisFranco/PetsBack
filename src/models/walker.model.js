@@ -41,7 +41,7 @@ const walkerSchema = new Schema(
       type: String,
     },
     cost: {
-      type: Number,
+      type: String,
     },
     workingHours: {
       type: String,
