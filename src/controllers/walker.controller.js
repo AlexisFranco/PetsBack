@@ -27,7 +27,6 @@ module.exports = {
 
       const walkers = await Walker.find(query);
       res.status(200).json({ walkers });
-
     } catch (error) {
       res.status(400).json({ message: 'Walkers could not be found', error });
     }
