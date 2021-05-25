@@ -34,7 +34,7 @@ module.exports = {
       const services = await Service.find(query)
         .populate({
           path: 'petID',
-          select: 'name',
+          select: 'name photo whatPet',
         })
         .populate({
           path: 'walkerID',
@@ -55,6 +55,9 @@ module.exports = {
       if (walker._id.toString() === service.walkerID.toString()) {
         const serviceUpdate = await Service.findByIdAndUpdate(serviceID, body, {
           new: true,
+        }).populate({
+          path: 'petID',
+          select: 'name photo whatPet',
         });
         res.status(200).json({ message: 'Service updated', serviceUpdate });
       } else {
